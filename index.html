@@ -5,11 +5,18 @@
 	<title>What to do?</title>
 </head>
 <body>
+	<h1 id="main">Todo</h1>
+	<h2 id="todo">What has to get done?</h2>
+
+	<script id="modelTemplate" type="text/x-handlebars-template">
+		<div><input type="checkbox" /> {{ title }} </div>
+	</script>
 
 	<script src="assets/js/jquery/min.js"></script>
 	<script src="assets/js/underscore.js"></script>
 	<script src="assets/js/backbone.js"></script>
 	<script src="assets/js/handlebars.js"></script>
 	<script src="models/todoModel.js"></script>
+	<script src="views/todoView.js"></script>
 </body>
 </html>
