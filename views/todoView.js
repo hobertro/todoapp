@@ -13,8 +13,3 @@ var todoView = Backbone.View.extend({
 	}
 });
 
-var todoview = new todoView({ model: todo1});
-
-console.log(todoview.render().el);
-
-$("#todo").append(todoview.render().el);

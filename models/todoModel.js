@@ -5,5 +5,5 @@ var Todo = Backbone.Model.extend({
 	}
 });
 
-var todo1 = new Todo();
+
 

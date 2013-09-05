@@ -1,12 +1,15 @@
 <!DOCTYPE HTML>
 <html>
 <head>
+	<link rel="stylesheet" type="text/css" href="assets/css/index.css"> 
 	<meta charset="UTF-8">
 	<title>What to do?</title>
 </head>
 <body>
-	<h1 id="main">Todo</h1>
-	<h2 id="todo">What has to get done?</h2>
+	<h1 id="main">Ghetto Todo List</h1>
+	<h2 id="inputForm">What has to get done?</h2>
+	<input type="form" id="inputTodo"/> <button id="enter">Enter</button>
+	<h2 id="todo">Todos</h2>
 
 	<script id="modelTemplate" type="text/x-handlebars-template">
 		<div><input type="checkbox" /> {{ title }} </div>
@@ -18,5 +21,6 @@
 	<script src="assets/js/handlebars.js"></script>
 	<script src="models/todoModel.js"></script>
 	<script src="views/todoView.js"></script>
+	<script src="app.js"></script>
 </body>
 </html>

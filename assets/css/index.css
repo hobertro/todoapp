@@ -1,0 +1,12 @@
+body {
+	font-family: Arial;
+	text-align: center;
+}
+
+h1 {
+	color: red;
+}
+
+#todo {
+	margin-top: 50px;
+}
