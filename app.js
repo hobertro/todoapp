@@ -1,32 +1,52 @@
 // models
-
+/*
 $("#enter").on("click", function(){
 	var value = $("#inputTodo").val();
 	createView(value);
 });
 
+
 function createView(val){
 	var newView = new todoView({model: createModel(val)});
-	$("#todo").append(newView.render().el);
+	console.log(newView.render().el);
+	$("#todos").append(newView.render().el);
 }
 
 function createModel(val){
-	var todo = new Todo({title: val});
+	var todo = new TodoModel({title: val});
 	return todo;
 }
+*/
+// app view
 
-var todo1 = new Todo();
+
+
+var todo1 = new TodoModel();
 
 // views
 
+// test code
+
 var todoview = new todoView({ model: todo1});
 
-$("#todo").append(todoview.render().el);
+$("#todos").append(todoview.render().el);
 
-// app view
+// collection
 
-var appView = Backbone.View.extend({
-	initialize: {
+var newCollection = new TodoCollection();
 
-	}
-});
+// creating new todo models for collection
+
+var todoA = new TodoModel({title: "Practice code", completed: true}),
+	todoB = new TodoModel({title: "Go to Piece of Cake", completed: false}),
+	todoC = new TodoModel({title: "Sell truck", completed: false});
+
+newCollection.add(todoA);
+newCollection.add(todoB);
+newCollection.add(todoC);
+
+appview = new AppView({collection: newCollection});
+
+$("#todos").append(appview.render());
+
+

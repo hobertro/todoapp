@@ -1,3 +1,4 @@
-var todoCollection = Backbone.Collection.extend({
-	model: Todo
+var TodoCollection = Backbone.Collection.extend({
+	model: TodoModel
 });
+

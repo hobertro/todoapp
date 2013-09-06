@@ -6,10 +6,14 @@
 	<title>What to do?</title>
 </head>
 <body>
-	<h1 id="main">Ghetto Todo List</h1>
-	<h2 id="inputForm">What has to get done?</h2>
-	<input id="inputTodo" placeholder="To do?" autofocus /> <button type="reset" id="enter">Enter</button>
-	<h2 id="todo">Todos</h2>
+	<section id="todoapp">
+		<h1 id="main">Ghetto Todo List</h1>
+		<section id="todo">
+			<h2 id="inputForm">What has to get done?</h2>
+			<input id="inputTodo" placeholder="To do?" autofocus /> <button type="submit" id="enter">Enter</button>
+			<h2 id="todos">Todos</h2>
+		</section>
+	</section>
 
 	<script id="modelTemplate" type="text/x-handlebars-template">
 		<input type="checkbox" /> {{ title }} 
@@ -20,7 +24,9 @@
 	<script src="assets/js/backbone.js"></script>
 	<script src="assets/js/handlebars.js"></script>
 	<script src="models/todoModel.js"></script>
+	<script src="models/todoCollections.js"></script>
 	<script src="views/todoView.js"></script>
+	<script src="views/appView.js"></script>
 	<script src="app.js"></script>
 </body>
 </html>
