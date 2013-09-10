@@ -12,9 +12,6 @@ events: {
 	"click #enter": "createTodo"
 },
 
-test: function(){
-	alert("hi!");
-},
 
 //render a collection of models 
 render: function(){

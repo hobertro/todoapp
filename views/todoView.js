@@ -17,8 +17,11 @@ var todoView = Backbone.View.extend({
 		return this;
 	},
 	strikeout: function(){
-		alert("hi");
-		this.$el.css("textDecoration", "line-through");
+			if (this.$el.css("textDecoration") === "none"){
+			this.$el.css("textDecoration", "line-through");
+		}	else {
+			this.$el.css("textDecoration", "none");
+		}
 	}
 });
 
