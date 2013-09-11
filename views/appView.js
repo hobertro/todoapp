@@ -1,7 +1,5 @@
 var AppView = Backbone.View.extend({
 
-tagName: "ul",
-
 el: "#todoapp",
 
 initialize: function(){
@@ -9,9 +7,9 @@ initialize: function(){
 },
 
 events: {
-	"click #enter": "createTodo"
+	"click #enter": "createTodo",
+	'keypress #new-todo': 'createOnEnter'
 },
-
 
 //render a collection of models 
 render: function(){
@@ -31,14 +29,12 @@ createTodo: function(){
 
 createView: function(value){
 	var newView = new todoView({model: this.createModel(value)});
-	console.log(newView.render().el);
-	$("#todos").append(newView.render().el);
+	$("#todo").append(newView.render().el);
 },
 
 createModel: function(value){
 	var todo = new TodoModel({title: value});
 	return todo;
 }
-
 });
 

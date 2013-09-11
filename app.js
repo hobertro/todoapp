@@ -1,26 +1,3 @@
-// models
-/*
-$("#enter").on("click", function(){
-	var value = $("#inputTodo").val();
-	createView(value);
-});
-
-
-function createView(val){
-	var newView = new todoView({model: createModel(val)});
-	console.log(newView.render().el);
-	$("#todos").append(newView.render().el);
-}
-
-function createModel(val){
-	var todo = new TodoModel({title: val});
-	return todo;
-}
-*/
-// app view
-
-
-
 var todo1 = new TodoModel();
 
 // views
@@ -29,7 +6,7 @@ var todo1 = new TodoModel();
 
 var todoview = new todoView({ model: todo1});
 
-$("#todos").append(todoview.render().el);
+$("#todo").append(todoview.render().el);
 
 // collection
 
@@ -45,9 +22,7 @@ newCollection.add(todoA);
 newCollection.add(todoB);
 newCollection.add(todoC);
 
+
 appview = new AppView({collection: newCollection});
-
-$("#todos").append(appview.render());
-
-
+appview.render();
 

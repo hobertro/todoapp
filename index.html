@@ -12,11 +12,16 @@
 			<h2 id="inputForm">What has to get done?</h2>
 			<input id="inputTodo" placeholder="To do?" autofocus /> <button type="submit" id="enter">Enter</button>
 			<h2 id="todos">Todos</h2>
+			
 		</section>
 	</section>
 
 	<script id="modelTemplate" type="text/x-handlebars-template">
-		<input type="checkbox" /> {{ title }} 
+		<input type="checkbox" /> {{ title }} <button type="submit" id="edit">Edit</button><button type="submit" id="delete">Delete</button>
+	</script>
+
+	<script id="editTemplate" type="text/x-handlebars-template">
+		<input value="{{title}}" /> <button id="save">Save</button>
 	</script>
 
 	<script src="assets/js/jquery/min.js"></script>
@@ -28,5 +33,6 @@
 	<script src="views/todoView.js"></script>
 	<script src="views/appView.js"></script>
 	<script src="app.js"></script>
+
 </body>
 </html>
