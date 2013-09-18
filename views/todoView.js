@@ -30,7 +30,6 @@ var todoView = Backbone.View.extend({
 	},
 	editView: function(){
 		var editView = new editTodoView({model: this.model});
-		console.log(editView);
 		this.$el.append(editView.render().el);
 	},
 	deleteView: function(){
@@ -41,9 +40,10 @@ var todoView = Backbone.View.extend({
 });
 
 var editTodoView = Backbone.View.extend({
-
+	className: "test",
 	events: {
-		"click button": "saveEdit"
+		"click button": "saveEdit",
+		"keypress input": "createOnEnter"
 	},
 
 	template: Handlebars.compile($("#editTemplate").html()),
@@ -54,8 +54,16 @@ var editTodoView = Backbone.View.extend({
 	},
 	saveEdit: function(){
 		console.log(this.$el.find("input").val());
-		var saved = this.$el.find("input").val();
-		this.model.set({"title": saved});
+		var savedInput = this.$el.find("input").val();
+		console.log(savedInput);
+		this.model.set({"title": savedInput});
 		console.log("Model title changed to " + this.model.get("title"));
+	},
+	createOnEnter: function(event){
+	if (event.which !== 13 || !this.$el.find("input").val().trim()){
+		return;
+		// 13 is keyCode property for "Enter Key"
+	}
+	this.saveEdit();
 	}
 });
