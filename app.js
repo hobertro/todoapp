@@ -2,7 +2,7 @@ var todo1 = new TodoModel();
 
 // views
 
-// test code
+// Nothing important  test
 
 var todoview = new todoView({ model: todo1});
 
