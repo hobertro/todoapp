@@ -3,8 +3,8 @@ var AppView = Backbone.View.extend({
 el: "#todoapp",
 
 initialize: function(){
-	this.$enter = this.$('#enter');
-	this.$inputTodo = this.$('#inputTodo');
+	$enter = this.$('#enter');
+	$inputTodo = this.$('#inputTodo');
 },
 
 events: {
@@ -24,9 +24,14 @@ render: function(){
 //for creating views through the form input
 
 createTodo: function(){
-	var value = $("#inputTodo").val();
+	//var value = $("#inputTodo").val();
+	if ($inputTodo.val() === "" || null) {
+		return;
+	} else {
+	var value = $inputTodo.val();
 	this.createView(value);
-	this.$inputTodo.val("");
+	$inputTodo.val(""); // reset value
+	}
 },
 
 createView: function(value){
@@ -39,7 +44,7 @@ createModel: function(value){
 	return todo;
 },
 createOnEnter: function(event){
-	if (event.which !== 13 || !this.$inputTodo.val().trim()){
+	if (event.which !== 13 || !$inputTodo.val().trim()){
 		return;
 		// 13 is keyCode property for "Enter Key"
 	}

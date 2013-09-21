@@ -29,6 +29,7 @@ var todoView = Backbone.View.extend({
 		}
 	},
 	editView: function(){
+		// if the view exists
 		if($(".test").length === 0){
 		var editView = new editTodoView({model: this.model});
 		this.$el.append(editView.render().el);
@@ -58,11 +59,13 @@ var editTodoView = Backbone.View.extend({
 		return this;
 	},
 	saveEdit: function(){
-		console.log(this.$el.find("input").val());
+		if ($(".test").val() === "" || null){
+			return;
+		} else {
 		var savedInput = this.$el.find("input").val();
-		console.log(savedInput);
 		this.model.set({"title": savedInput});
 		console.log("Model title changed to " + this.model.get("title"));
+		}
 	},
 	createOnEnter: function(event){
 	if (event.which !== 13 || !this.$el.find("input").val().trim()){
