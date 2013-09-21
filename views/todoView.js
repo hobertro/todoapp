@@ -29,8 +29,13 @@ var todoView = Backbone.View.extend({
 		}
 	},
 	editView: function(){
+		if($(".test").length === 0){
 		var editView = new editTodoView({model: this.model});
 		this.$el.append(editView.render().el);
+		} else {
+			return ;
+		}
+		
 	},
 	deleteView: function(){
 		this.model.destroy();
