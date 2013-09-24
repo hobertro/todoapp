@@ -1,4 +1,4 @@
-var TodoCollection = Backbone.Collection.extend({
+var TodoCollection = Parse.Collection.extend({
 	model: TodoModel
 });
 

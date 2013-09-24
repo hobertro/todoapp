@@ -3,6 +3,7 @@
 <head>
 	<link rel="stylesheet" type="text/css" href="assets/css/index.css"> 
 	<meta charset="UTF-8">
+	<script src="http://www.parsecdn.com/js/parse-1.2.12.min.js"></script>
 	<title>What to do?</title>
 </head>
 <body>
@@ -16,6 +17,11 @@
 		</section>
 	</section>
 
+	<section id="signIn">
+
+
+	</section>
+
 	<script id="modelTemplate" type="text/x-handlebars-template">
 		<input type="checkbox" /> {{ title }} <button type="submit" id="edit">Edit</button><button type="submit" id="delete">Delete</button>
 	</script>
@@ -23,6 +29,28 @@
 	<script id="editTemplate" type="text/x-handlebars-template">
 		<input value="{{title}}" /> <button id="save">Save</button>
 	</script>
+
+	<script id="loginTemplate" type="text/x-handlebars-template">
+		<h1>Log In</h1>
+		<form name="login">
+			<label for="username">Username:</label>
+			<input id="username" placeholder="Username" type="text" name="username" />
+			<label for="login-password">Password:</label>
+			<input id="login-password" placeholder="Password" type="password" name="password" />
+			<button type="button" id="submit-login">Submit</button>
+		</form>
+
+		<h1>Sign Up</h1>
+		<form name="signup">
+			<label for="signup">Username:</label>
+			<input id="signUp" placeholder="Username" type="text" name="signupname" />
+			<label for="signup-password">Password:</label>
+			<input id="signup-password" placeholder="Password" type="password" name="password" />
+			<button type="button" id="submit-signup">Submit</button>
+		</form>
+	</script>
+
+
 
 	<script src="assets/js/jquery/min.js"></script>
 	<script src="assets/js/underscore.js"></script>

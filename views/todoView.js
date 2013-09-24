@@ -46,7 +46,6 @@ var todoView = Backbone.View.extend({
 });
 
 var editTodoView = Backbone.View.extend({
-	className: "test",
 	events: {
 		"click button": "saveEdit",
 		"keypress input": "createOnEnter"

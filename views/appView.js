@@ -1,3 +1,5 @@
+Parse.initialize("AdGqJXnBWEDhZKgqPnKKlxiLOdzbbCc8Vv2KEanX", "I66EXwDbj2TCTpWjgsHjqwnEYdhb61ChiqiCxpO5");
+
 var AppView = Backbone.View.extend({
 
 el: "#todoapp",
@@ -5,6 +7,7 @@ el: "#todoapp",
 initialize: function(){
 	$enter = this.$('#enter');
 	$inputTodo = this.$('#inputTodo');
+	this.render();
 },
 
 events: {
@@ -14,6 +17,11 @@ events: {
 
 //render a collection of models 
 render: function(){
+
+},
+
+//for creating views through the form input
+createCollection: function(){
 	this.collection.forEach(function(model){
 		var modelView = new todoView({model: model});
 		this.$el.append(modelView.el);
@@ -21,10 +29,7 @@ render: function(){
 	return this;
 },
 
-//for creating views through the form input
-
 createTodo: function(){
-	//var value = $("#inputTodo").val();
 	if ($inputTodo.val() === "" || null) {
 		return;
 	} else {
@@ -51,4 +56,39 @@ createOnEnter: function(event){
 	this.createTodo();
 }
 });
+
+// All things login and sign up
+
+var loginView = Backbone.View.extend({
+	el: "#todoapp",
+	template: Handlebars.compile($("#loginTemplate").html()),
+	initialize: function(){
+		this.render();
+	},
+	events: {
+		"click #submit-signup": "signUp"
+	},
+	render: function(){
+		$("#todoapp").append(signupTemplate());
+	},
+	signUp: function(){
+		var username = $("#signUp").val();
+		var password = $("#signup-password").val();
+		
+		Parse.User.signUp(username, password, { ACL: new Parse.ACL() }, {
+			success: function(user) {
+				alert("success!");
+				new AppView();
+  },
+  error: function(user, error) {
+  alert("error");
+  }
+});
+	},
+	login: function(){
+
+	}
+});
+
+
 

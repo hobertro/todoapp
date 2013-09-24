@@ -1,4 +1,5 @@
-var TodoModel = Backbone.Model.extend({
+var TodoModel = Parse.Object.extend("Todo", {
+	className: "Todo",
 	defaults: {
 		title: "I am a title",
 		completed: false
@@ -16,4 +17,7 @@ var TodoModel = Backbone.Model.extend({
 });
 
 
+var todoCollection = Parse.Collection.extend({
+model: TodoModel
+});
 
