@@ -7,10 +7,6 @@ el: "#todoapp",
 initialize: function(){
 	$enter = this.$('#enter');
 	$inputTodo = this.$('#inputTodo');
-	this.todos = new TodoCollection();
-	/*this.todos.query = new Parse.Query(TodoModel);
-	this.todos.query.equalTo("user", Parse.User.current());
-	this.todos.fetch();*/
 	this.render();
 },
 
@@ -77,6 +73,8 @@ var loginView = Backbone.View.extend({
 	el: "#todoapp",
 	template: Handlebars.compile($("#loginTemplate").html()),
 	initialize: function(){
+		var self = this;
+		//_.bindAll(this, "load");
 		this.render();
 	},
 	events: {
@@ -95,22 +93,49 @@ var loginView = Backbone.View.extend({
 				alert("success!");
 				new AppView();
   },
-  error: function(user, error) {
-  alert("error");
-  }
-});
+	error: function(user, error) {
+	alert("error");
+	}
+	});
+	},
+	test: function(){
+		alert("test");
 	},
 	login: function(){
+		var self = this;
 		var username = $("#username").val();
 		var password = $("#login-password").val();
 		Parse.User.logIn(username, password,{
 			success: function(user){
 				alert("login successful!");
+				self.load();
+				
 			},
 			error: function(user, error){
 				alert("login failed");
 			}
 		});
+	},
+	load: function(){
+		var self = this;
+		var query = new Parse.Query(TodoModel);
+		query.equalTo("user", Parse.User.current());
+		query.find({
+			success: function(results){
+				alert("Successfully retrieved " + results.length + " To do models");
+				console.log(results);
+				self.collectionLoad(results);
+
+			},
+			error: function(error){
+				alert("Error, could not load models");
+			}
+		});
+	},
+	collectionLoad: function(results){
+		var userCollection = new TodoCollection(results);
+		var userAppView = new AppView({collection: userCollection});
+		userAppView.createCollection();
 	}
 });
 
