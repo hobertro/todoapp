@@ -4,10 +4,13 @@ var AppView = Backbone.View.extend({
 
 el: "#todoapp",
 
+template: Handlebars.compile($("#inputTemplate").html()),
+
 initialize: function(){
+	this.render();
 	$enter = this.$('#enter');
 	$inputTodo = this.$('#inputTodo');
-	this.render();
+	$todos = this.$("#todos");
 },
 
 events: {
@@ -17,14 +20,14 @@ events: {
 
 //render a collection of models 
 render: function(){
-
+	this.$el.html(this.template());
 },
 
 //for creating views through the form input
 createCollection: function(){
 	this.collection.forEach(function(model){
 		var modelView = new todoView({model: model});
-		this.$el.append(modelView.el);
+		$todos.append(modelView.el);
 	}, this);
 	return this;
 },
@@ -41,7 +44,7 @@ createTodo: function(){
 
 createView: function(value){
 	var newView = new todoView({model: this.createModel(value)});
-	$("#todo").append(newView.render().el);
+	$("#todos").append(newView.render().el);
 },
 
 createModel: function(value){
@@ -124,6 +127,7 @@ var loginView = Backbone.View.extend({
 			success: function(results){
 				alert("Successfully retrieved " + results.length + " To do models");
 				console.log(results);
+
 				self.collectionLoad(results);
 
 			},
