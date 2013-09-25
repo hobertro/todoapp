@@ -7,6 +7,10 @@ el: "#todoapp",
 initialize: function(){
 	$enter = this.$('#enter');
 	$inputTodo = this.$('#inputTodo');
+	this.todos = new TodoCollection();
+	/*this.todos.query = new Parse.Query(TodoModel);
+	this.todos.query.equalTo("user", Parse.User.current());
+	this.todos.fetch();*/
 	this.render();
 },
 
@@ -45,7 +49,17 @@ createView: function(value){
 },
 
 createModel: function(value){
-	var todo = new TodoModel({title: value});
+	var todo = new TodoModel({title: value,
+		user: Parse.User.current()
+	});
+	todo.save(null, {
+		success: function(test){
+			console.log("model saved");
+		},
+		error: function(test, error){
+			console.log("model not saved");
+		}
+	});
 	return todo;
 },
 createOnEnter: function(event){
@@ -66,7 +80,8 @@ var loginView = Backbone.View.extend({
 		this.render();
 	},
 	events: {
-		"click #submit-signup": "signUp"
+		"click #submit-signup": "signUp",
+		"click #submit-login": "login"
 	},
 	render: function(){
 		$("#todoapp").append(signupTemplate());
@@ -86,7 +101,16 @@ var loginView = Backbone.View.extend({
 });
 	},
 	login: function(){
-
+		var username = $("#username").val();
+		var password = $("#login-password").val();
+		Parse.User.logIn(username, password,{
+			success: function(user){
+				alert("login successful!");
+			},
+			error: function(user, error){
+				alert("login failed");
+			}
+		});
 	}
 });
 

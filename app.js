@@ -3,7 +3,7 @@ var signupTemplate = Handlebars.compile($("#loginTemplate").html());
 
 
 
-var todo1 = new TodoModel();
+//var todo1 = new TodoModel();
 
 // views
 
@@ -11,9 +11,9 @@ var newLoginView = new loginView();
 
 // Nothing important  test
 
-var todoview = new todoView({ model: todo1});
+//var todoview = new todoView({ model: todo1});
 
-$("#todo").append(todoview.render().el);
+// $("#todo").append(todoview.render().el);
 
 // collection
 
