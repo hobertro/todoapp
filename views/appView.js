@@ -88,21 +88,19 @@ var loginView = Backbone.View.extend({
 		$("#todoapp").append(signupTemplate());
 	},
 	signUp: function(){
+		var self = this;
 		var username = $("#signUp").val();
 		var password = $("#signup-password").val();
 		
 		Parse.User.signUp(username, password, { ACL: new Parse.ACL() }, {
 			success: function(user) {
 				alert("success!");
-				new AppView();
+				self.load();
   },
 	error: function(user, error) {
 	alert("error");
 	}
 	});
-	},
-	test: function(){
-		alert("test");
 	},
 	login: function(){
 		var self = this;
