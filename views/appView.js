@@ -126,8 +126,6 @@ var loginView = Backbone.View.extend({
 		query.find({
 			success: function(results){
 				alert("Successfully retrieved " + results.length + " To do models");
-				console.log(results);
-
 				self.collectionLoad(results);
 
 			},

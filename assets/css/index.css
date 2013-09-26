@@ -10,3 +10,8 @@ h1 {
 #todo {
 	margin-top: 50px;
 }
+
+.strikethrough {
+	text-decoration: line-through;
+	color: red;
+}

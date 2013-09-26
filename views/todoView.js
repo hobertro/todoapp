@@ -1,6 +1,7 @@
 var todoView = Backbone.View.extend({
 
-	tagName: "li",
+
+	// tagName:
 	// will render each time a new view is created
 
 	template: Handlebars.compile($("#modelTemplate").html()),
@@ -13,6 +14,7 @@ var todoView = Backbone.View.extend({
 	},
 
 	initialize: function(){
+		this.listenTo(this.model, 'change', this.render);
 		this.render();
 	},
 	render: function(){
@@ -20,17 +22,19 @@ var todoView = Backbone.View.extend({
 		return this;
 	},
 	strikeout: function(){
-			if (this.$el.css("textDecoration") === "none"){
-			this.$el.css("textDecoration", "line-through");
+			if (this.$("li").css("textDecoration") === "none"){
+			this.$("li").css("textDecoration", "line-through");
 			this.model.set("completed", true);
+			this.model.save();
 		}	else {
-			this.$el.css("textDecoration", "none");
+			this.$("li").css("textDecoration", "none");
 			this.model.set("completed", false);
+			this.model.save();
 		}
 	},
 	editView: function(){
 		// if the view exists
-		if($(".test").length === 0){
+		if($(".edit").length === 0){
 		var editView = new editTodoView({model: this.model});
 		this.$el.append(editView.render().el);
 		} else {
@@ -46,6 +50,7 @@ var todoView = Backbone.View.extend({
 });
 
 var editTodoView = Backbone.View.extend({
+	className: "edit",
 	events: {
 		"click button": "saveEdit",
 		"keypress input": "createOnEnter"
@@ -65,6 +70,7 @@ var editTodoView = Backbone.View.extend({
 		this.model.set({"title": savedInput});
 		console.log("Model title changed to " + this.model.get("title"));
 		}
+		this.model.save();
 	},
 	createOnEnter: function(event){
 	if (event.which !== 13 || !this.$el.find("input").val().trim()){
@@ -72,5 +78,6 @@ var editTodoView = Backbone.View.extend({
 		// 13 is keyCode property for "Enter Key"
 	}
 	this.saveEdit();
+	this.remove();
 	}
 });
