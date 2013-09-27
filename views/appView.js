@@ -7,8 +7,6 @@ el: "#todoapp",
 template: Handlebars.compile($("#inputTemplate").html()),
 
 initialize: function(){
-	var a = 0;
-	console.log(a++);
 	this.render();
 	$enter = this.$('#enter');
 	$inputTodo = this.$('#inputTodo');
@@ -23,7 +21,7 @@ events: {
 
 //render a collection of models 
 render: function(){
-	this.$el.html(this.template());
+	this.$el.html(this.template({username: Parse.User.current().attributes.username}));
 	var currentUser = Parse.User.current();
 	if (currentUser) {
     // do stuff with the user
@@ -59,7 +57,7 @@ createView: function(value){
 
 createModel: function(value){
 	var todo = new TodoModel({title: value,
-		user: Parse.User.current()
+		//user: Parse.User.current()
 	});
 	todo.save(null, {
 		success: function(test){
@@ -79,16 +77,10 @@ createOnEnter: function(event){
 	this.createTodo();
 },
 logOut: function(){
-	var test = 0;
-	console.log(test++);
-	Parse.User.logOut({
-		success: function(){
-			alert("user signed out");
-		}
-	});
+	Parse.User.logOut();
 	var newLoginView = new loginView();
 	this.undelegateEvents();
-}
+	}
 });
 
 // All things login and sign up
@@ -120,8 +112,8 @@ var loginView = Backbone.View.extend({
   },
 	error: function(user, error) {
 	alert("error");
-	}
-	});
+			}
+		});
 	},
 	login: function(){
 		var self = this;
@@ -131,7 +123,6 @@ var loginView = Backbone.View.extend({
 			success: function(user){
 				alert("login successful!");
 				self.load();
-				
 			},
 			error: function(user, error){
 				alert("login failed");

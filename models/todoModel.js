@@ -3,8 +3,9 @@ Parse.initialize("AdGqJXnBWEDhZKgqPnKKlxiLOdzbbCc8Vv2KEanX", "I66EXwDbj2TCTpWjgs
 var TodoModel = Parse.Object.extend("Todo", {
 	defaults: {
 		title: "I am a title",
-		completed: false
-	},
+		completed: false,
+		user: Parse.User.current()
+			},
 	validate: function(attrs){
 		if(attrs.title < 2){
 			return "error";
