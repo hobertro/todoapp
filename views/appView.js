@@ -7,6 +7,8 @@ el: "#todoapp",
 template: Handlebars.compile($("#inputTemplate").html()),
 
 initialize: function(){
+	var a = 0;
+	console.log(a++);
 	this.render();
 	$enter = this.$('#enter');
 	$inputTodo = this.$('#inputTodo');
@@ -15,12 +17,20 @@ initialize: function(){
 
 events: {
 	"click #enter": "createTodo",
-	'keypress #inputTodo': 'createOnEnter'
+	'keypress #inputTodo': 'createOnEnter',
+	"click #logout": "logOut"
 },
 
 //render a collection of models 
 render: function(){
 	this.$el.html(this.template());
+	var currentUser = Parse.User.current();
+	if (currentUser) {
+    // do stuff with the user
+	} else {
+    // show the signup or login page
+	}
+	return this;
 },
 
 //for creating views through the form input
@@ -67,6 +77,17 @@ createOnEnter: function(event){
 		// 13 is keyCode property for "Enter Key"
 	}
 	this.createTodo();
+},
+logOut: function(){
+	var test = 0;
+	console.log(test++);
+	Parse.User.logOut({
+		success: function(){
+			alert("user signed out");
+		}
+	});
+	var newLoginView = new loginView();
+	this.undelegateEvents();
 }
 });
 
@@ -77,7 +98,6 @@ var loginView = Backbone.View.extend({
 	template: Handlebars.compile($("#loginTemplate").html()),
 	initialize: function(){
 		var self = this;
-		//_.bindAll(this, "load");
 		this.render();
 	},
 	events: {
@@ -85,7 +105,8 @@ var loginView = Backbone.View.extend({
 		"click #submit-login": "login"
 	},
 	render: function(){
-		$("#todoapp").append(signupTemplate());
+		this.$el.html(this.template());
+		return this;
 	},
 	signUp: function(){
 		var self = this;
@@ -125,6 +146,7 @@ var loginView = Backbone.View.extend({
 			success: function(results){
 				alert("Successfully retrieved " + results.length + " To do models");
 				self.collectionLoad(results);
+				self.undelegateEvents();
 
 			},
 			error: function(error){
