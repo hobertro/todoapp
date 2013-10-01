@@ -1,6 +1,4 @@
 var todoView = Backbone.View.extend({
-
-
 	// tagName:
 	// will render each time a new view is created
 
@@ -33,7 +31,7 @@ var todoView = Backbone.View.extend({
 		}
 	},
 	editView: function(){
-		// if the view exists
+		// if the edit view doesn't exist, then create one. 
 		if($(".edit").length === 0){
 		var editView = new editTodoView({model: this.model});
 		this.$el.append(editView.render().el);
