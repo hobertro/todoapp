@@ -11,6 +11,5 @@ var TodoModel = Parse.Object.extend("Todo", {
 	defaults: {
 		title: "I am a title",
 		completed: false,
-		//user: Parse.User.current()
 			}
 });

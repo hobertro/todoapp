@@ -11,7 +11,7 @@ var AppView = Backbone.View.extend({
 		$enter = this.$('#enter');
 		$inputTodo = this.$('#inputTodo');
 		$todos = this.$("#todos");
-		//this.createCollection(this.collection);
+		this.createCollection(this.collection);
 	},
 
 	events: {
