@@ -3,7 +3,6 @@ Parse.initialize("AdGqJXnBWEDhZKgqPnKKlxiLOdzbbCc8Vv2KEanX", "I66EXwDbj2TCTpWjgs
 var TodoCollection = Parse.Collection.extend({
 	model: TodoModel,
 	allTodo: function(){
-		console.log(this.models);
 		return this.models;
 	},
 	uncomplete: function(){

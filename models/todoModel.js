@@ -2,8 +2,7 @@ Parse.initialize("AdGqJXnBWEDhZKgqPnKKlxiLOdzbbCc8Vv2KEanX", "I66EXwDbj2TCTpWjgs
 
 var TodoModel = Parse.Object.extend("Todo", {
 	initialize: function(){
-		console.log("Model created and belongs to user " + Parse.User.current().toJSON().username);
-		console.log(this.toJSON());
+		//console.log("Model created and belongs to user " + Parse.User.current().toJSON().username);
 		this.on('change', function(){
 			console.log("Model has changed");
 		});
