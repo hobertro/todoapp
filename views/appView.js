@@ -11,7 +11,7 @@ var AppView = Backbone.View.extend({
 		$enter = this.$('#enter');
 		$inputTodo = this.$('#inputTodo');
 		$todos = this.$("#todos");
-		this.createCollection(this.collection);
+		this.createCollection();
 	},
 
 	events: {
@@ -26,25 +26,27 @@ var AppView = Backbone.View.extend({
 
 	//render a collection of models 
 	render: function(){
-		//$todos = this.$("#todos");
 		this.$el.html(this.template({username: Parse.User.current().attributes.username}));
 		var currentUser = Parse.User.current();
-		if (currentUser) {
-			//this.createCollection();
-		// do stuff with the user
+		if (currentUser){
+
 		} else {
-		// show the signup or login page
+			//commit
 		}
-		return this;
+
 	},
 
 	//for creating views through the form input
 	createCollection: function(newCollection){
 			newCollection = newCollection || this.collection;
+			if (newCollection){
 			newCollection.forEach(function(model){
 			var modelView = new todoView({model: model});
 			$todos.append(modelView.el);
 		}, this);
+		}	else {
+			return;
+		}
 		return this;
 	},
 
@@ -64,7 +66,7 @@ var AppView = Backbone.View.extend({
 	},
 
 	createModel: function(value){
-		var todo = new TodoModel({title: value, user: Parse.User.current()});
+		var todo = new TodoModel({title: value /*user: Parse.User.current()}*/});
 		this.collection.add(todo);
 		todo.save(null, {
 			success: function(test){

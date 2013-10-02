@@ -2,6 +2,7 @@
 // $("#signIn").append(signupTemplate());
 
 var newLoginView = new loginView();
+//var AppView = new AppView();
 /*
 var testCollection = new TodoCollection();
 testCollection.add({name: "BOb", id: 1, completed: true});
