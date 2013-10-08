@@ -47,6 +47,7 @@ var AppView = Backbone.View.extend({
 		if (currentUser){
 			this.$el.html(this.template({username: Parse.User.current().toJSON().username}));
 		} else {
+
 			var newLoginView = new loginView();
 		}
 
@@ -165,6 +166,7 @@ var loginView = Backbone.View.extend({
 	},
 	login: function(e){
 		e.preventDefault();
+		this.undelegateEvents();
 		$('#submit-login').attr("disabled", true);
 		var self = this;
 		var username = $("#username").val();
@@ -172,7 +174,7 @@ var loginView = Backbone.View.extend({
 		Parse.User.logIn(username, password,{
 			success: function(user){
 				self.undelegateEvents();
-				var testView = new AppView();
+				var newView = new AppView();
 				var white = "white";
 				self.changeBackground(white);
 			},
