@@ -78,6 +78,7 @@ li {
 
 .strikethrough {
 	text-decoration: line-through;
+	color: orange;
 }
 
 /* Individial ToDo models */

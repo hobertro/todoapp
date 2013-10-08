@@ -119,15 +119,8 @@ var AppView = Backbone.View.extend({
 		$todos.html("");
 		this.createCollection();
 	},
-	testButton: function(){
-		this.test2();
-	},
-	test2: function(){
-		console.log(this.collection);
-		console.log(this.todos.query);
-	},
 	changeBackground: function(){
-		document.body.style.background = "#43D1C3";
+		document.body.style.background = "orange";
 	}
 });
 
@@ -139,8 +132,8 @@ var loginView = Backbone.View.extend({
 
 	template: Handlebars.compile($("#loginTemplate").html()),
 	initialize: function(){
-		var teal = "#43D1C3";
-		this.changeBackground(teal);
+		var orange = "orange";
+		this.changeBackground(orange);
 		var self = this;
 		this.render();
 	},
@@ -160,6 +153,7 @@ var loginView = Backbone.View.extend({
 		Parse.User.signUp(username, password, { ACL: new Parse.ACL() }, {
 			success: function(user) {
 				//alert("success!");
+				var white = "white";
 				self.undelegateEvents();
 				var testView = new AppView();
 				self.changeBackground(white);
@@ -171,12 +165,12 @@ var loginView = Backbone.View.extend({
 	},
 	login: function(e){
 		e.preventDefault();
+		$('#submit-login').attr("disabled", true);
 		var self = this;
 		var username = $("#username").val();
 		var password = $("#login-password").val();
 		Parse.User.logIn(username, password,{
 			success: function(user){
-				//alert("login successful!");
 				self.undelegateEvents();
 				var testView = new AppView();
 				var white = "white";
@@ -184,12 +178,13 @@ var loginView = Backbone.View.extend({
 			},
 			error: function(user, error){
 				alert("login failed");
+				$('#submit-login').attr("disabled", false);
 			}
 		});
 	},
 	changeBackground: function(color){
 		document.body.style.background = color;
-	}
+	},
 });
 
 
