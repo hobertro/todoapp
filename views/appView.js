@@ -47,11 +47,7 @@ var AppView = Backbone.View.extend({
 		if (currentUser){
 			this.$el.html(this.template({username: Parse.User.current().toJSON().username}));
 		} else {
-<<<<<<< HEAD
-
-=======
 			this.undelegateEvents();
->>>>>>> 00b191d4036e429773fa5c01bb45e78db8cb619b
 			var newLoginView = new loginView();
 		}
 
