@@ -47,6 +47,7 @@ var AppView = Backbone.View.extend({
 		if (currentUser){
 			this.$el.html(this.template({username: Parse.User.current().toJSON().username}));
 		} else {
+			//this.createLoginView();
 			this.newLoginView = new loginView();
 			this.newLoginView.parentView = this;
 			//this.undelegateEvents();
@@ -96,7 +97,7 @@ var AppView = Backbone.View.extend({
 		});
 		return todo;
 	},
-	createOnEnter: function(event1){
+	createOnEnter: function(event){
 		if (event.which !== 13 || !$inputTodo.val().trim()){
 			return;
 			// 13 is keyCode property for "Enter Key"
@@ -106,6 +107,7 @@ var AppView = Backbone.View.extend({
 	logOut: function(){
 		Parse.User.logOut();
 		var newLoginView = new loginView();
+		//this.createLoginView();
 		this.undelegateEvents();
 		this.changeBackground();
 		},
@@ -123,7 +125,12 @@ var AppView = Backbone.View.extend({
 	},
 	changeBackground: function(){
 		document.body.style.background = "orange";
-	}
+	},
+	/*createLoginView: function(){
+		var newLoginView = new loginView();
+		this.newLoginView.parentView = this;
+		this.newLoginView.render();
+	}*/
 });
 
 // All things login and sign up
@@ -138,7 +145,6 @@ var loginView = Backbone.View.extend({
 		this.changeBackground(orange);
 		var self = this;
 		this.render();
-
 	},
 	events: {
 		"click #submit-signup": "signUp",
@@ -156,7 +162,7 @@ var loginView = Backbone.View.extend({
 		Parse.User.signUp(username, password, { ACL: new Parse.ACL() }, {
 			success: function(user) {
 				var white = "white";
-				self.undelegateEvents();
+				//self.undelegateEvents();
 				this.parentView.render();
 				self.changeBackground(white);
   },
@@ -174,7 +180,8 @@ var loginView = Backbone.View.extend({
 		Parse.User.logIn(username, password,{
 			success: function(user){
 				self.undelegateEvents();
-				var testView = new AppView();
+				var newAppView = new AppView();
+				//self.parentView.render();
 				var white = "white";
 				self.changeBackground(white);
 			},
