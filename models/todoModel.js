@@ -1,8 +1,9 @@
 Parse.initialize("AdGqJXnBWEDhZKgqPnKKlxiLOdzbbCc8Vv2KEanX", "I66EXwDbj2TCTpWjgsHjqwnEYdhb61ChiqiCxpO5");
 
+var a = 0;
+
 var TodoModel = Parse.Object.extend("Todo", {
 	initialize: function(){
-		//console.log("Model created and belongs to user " + Parse.User.current().toJSON().username);
 		this.on('change', function(){
 			console.log("Model has changed");
 		});
@@ -10,5 +11,10 @@ var TodoModel = Parse.Object.extend("Todo", {
 	defaults: {
 		title: "I am a title",
 		completed: false,
+		},
+	validate: function(attrs){
+		if(attrs.title === null || ""){
+			return "Must set a title";
 		}
+	}
 });

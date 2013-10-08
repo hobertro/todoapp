@@ -1,26 +1,5 @@
-body {
-	font-family: Arial;
-	text-align: center;
-}
 
-h1 {
-	color: red;
-}
 
-#todo {
-	margin-top: 50px;
-}
 
-.strikethrough {
-	text-decoration: line-through;
-	color: red;
-}
 
-#logout {
-	font-size: 36px;
-}
 
-#loggedName {
-	font-size: 36px;
-	color: green;
-}

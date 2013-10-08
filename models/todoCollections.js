@@ -16,6 +16,9 @@ var TodoCollection = Parse.Collection.extend({
 			return todo.get("completed");
 		});
 		return completed;
+	},
+	comparator: function(model){
+		return model.get('title');
 	}
 });
 

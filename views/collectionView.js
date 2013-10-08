@@ -2,19 +2,17 @@ var collectionView = Backbone.View.extend({
 
 tagName: "ul",
 
-template: Handlebars.compile($("#todo")),
-
 initialize: function(){
-	this.$enter = this.$('#enter');
-	this.render();
-},
-
-events: {
 
 },
 
 render: function(){
-
+this.collection.each(function(models){
+	console.log(models);
+	var modelView = new todoView({model: models});
+	this.$el.append(modelView.el);
+	return this;
+}, this);
 }
 });
 

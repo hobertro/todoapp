@@ -18,14 +18,12 @@ var AppView = Backbone.View.extend({
 		this.todos.query.equalTo("user", Parse.User.current());
 		this.todos.query.find({
 			success: function(results){
-				alert("Successfully retrieved " + results.length + " To do models");
+				console.log(("Successfully retrieved " + results.length + " To do models"));
 				//self.undelegateEvents();
-				console.log("before results");
-				console.log(results);
-				self.createCollection(results);
 				_.each(results, function(model){
 					self.collection.add(model);
 				});
+				self.createCollection(self.collection);
 			},
 			error: function(error){
 				alert("Error, could not load models");
@@ -107,6 +105,7 @@ var AppView = Backbone.View.extend({
 		Parse.User.logOut();
 		var newLoginView = new loginView();
 		this.undelegateEvents();
+		this.changeBackground();
 		},
 	uncomplete: function(){
 		$todos.html("");
@@ -126,6 +125,9 @@ var AppView = Backbone.View.extend({
 	test2: function(){
 		console.log(this.collection);
 		console.log(this.todos.query);
+	},
+	changeBackground: function(){
+		document.body.style.background = "#43D1C3";
 	}
 });
 
@@ -137,6 +139,8 @@ var loginView = Backbone.View.extend({
 
 	template: Handlebars.compile($("#loginTemplate").html()),
 	initialize: function(){
+		var teal = "#43D1C3";
+		this.changeBackground(teal);
 		var self = this;
 		this.render();
 	},
@@ -148,35 +152,43 @@ var loginView = Backbone.View.extend({
 		this.$el.html(this.template());
 		return this;
 	},
-	signUp: function(){
+	signUp: function(e){
 		var self = this;
+		e.preventDefault();
 		var username = $("#signUp").val();
 		var password = $("#signup-password").val();
-		
 		Parse.User.signUp(username, password, { ACL: new Parse.ACL() }, {
 			success: function(user) {
-				alert("success!");
-				self.load();
+				//alert("success!");
+				self.undelegateEvents();
+				var testView = new AppView();
+				self.changeBackground(white);
   },
 	error: function(user, error) {
 	alert("error");
 			}
 		});
 	},
-	login: function(){
+	login: function(e){
+		e.preventDefault();
 		var self = this;
 		var username = $("#username").val();
 		var password = $("#login-password").val();
 		Parse.User.logIn(username, password,{
 			success: function(user){
-				alert("login successful!");
+				//alert("login successful!");
 				self.undelegateEvents();
 				var testView = new AppView();
+				var white = "white";
+				self.changeBackground(white);
 			},
 			error: function(user, error){
 				alert("login failed");
 			}
 		});
+	},
+	changeBackground: function(color){
+		document.body.style.background = color;
 	}
 });
 
