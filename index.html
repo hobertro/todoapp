@@ -1,0 +1,115 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="assets/css/normalize.css"> 
+	<link rel="stylesheet" type="text/css" href="assets/css/bootstrap.css"> 
+	<link rel="stylesheet" type="text/css" href="assets/css/index.css"> 
+	<link rel="stylesheet" type="text/css" href="assets/css/login.css"> 
+	<link rel="stylesheet" type="text/css" href="assets/css/appview.css"> 
+	<meta charset="UTF-8">
+	<script src="http://www.parsecdn.com/js/parse-1.2.12.min.js"></script>
+	<title>What to do?</title>
+</head>
+<body>
+	<section id="todoapp">
+		<h1 id="main">Ghetto Todo List</h1>
+	</section>
+
+	<section id="signIn">
+
+
+	</section>
+
+	<script id="inputTemplate" type="text/x-handlebars-template">
+		<section id="todo">
+			<div class="container">
+
+				Welcome <span id="loggedName"> {{username}}</span> to your JFDI TODO LIST :D </span><button type="button" class="btn btn-default" id="logout">Log Out	</button>	
+				<!--<h2 id="inputForm">What good will you today?</h2>-->
+
+				<input id="inputTodo" placeholder="What good will you do today?" autofocus /> <button type="submit" id="enter">Enter</button>
+				<button type="button" class="btn btn-success" id="testButton">Completed</button>
+				<button type="button" class="btn btn-warning" id="testButton2">Uncompleted</button>
+				<button type="button" class="btn btn-info"id="testButton3">All</button> 
+				<h1>REMEMBER TO JUST F*CKING DO IT:</h2> 
+					<div id="todos"></div>
+			</div>
+		</section>
+	</script>
+
+	<!-- Model template renders the model checkbox, model title, edit and delete button -->
+	<script id="modelTemplate" type="text/x-handlebars-template">
+		<li class="{{#if completed}} strikethrough {{else}} none {{/if}}" >
+		<input type="checkbox" {{#if completed}} checked="checked" {{/if}} /> {{ title }}
+		<button type="button" class="btn btn-primary" id="edit">Edit</button><button type="button" class="btn btn-danger" id="delete">Delete</button>
+		</li>
+	</script>
+
+	<!-- Edit view  -->
+
+	<script id="editTemplate" type="text/x-handlebars-template">
+		<input value="{{title}}" /> <button type="button" class="btn btn-info" id="save">Save</button>
+	</script>
+
+	<script id="loginTemplate" type="text/x-handlebars-template">
+	<div class="JFDI">
+		<h1>Welcome to the JFDI To Do List</h1>
+	
+	</div>
+
+	<div class="container">
+		<div class="test1">
+			<div class="login">
+				<h1>Login</h1>
+				<form method="post" action="">
+					<p><input type="text" id="username" name="login" value="" placeholder="Username"</p>
+					<p><input type="password" id="login-password" name="password" value="" placeholder="Password"></p>
+					<p class="remember_me">
+						<label>
+							<label>
+								<input type="checkbox" name="remember_me" id="remember_me">
+								Remember me on this computer
+							</label>
+						</label>
+					</p>
+					<p class="submit"><input type="submit" id="submit-login" name="commit" value="Login"></p>
+				</form>
+			</div>
+				<div class="login-help">
+					<p>Forgot your password? <a href="#">Click here to reset it</a>.
+				</div>
+		</div>
+		<div class="test2">
+				<div class="login">
+					<h1>Sign Up</h1>
+					<form method="post" action="">
+						<p><input type="text" id="signUp" name="signUp" value="" placeholder="Username"</p>
+						<p><input type="password" id="signup-password" name="password" value="" placeholder="Password"></>
+						<p class="remember_me">
+							<label>
+								<label>
+									<input type="checkbox" name="remember_me" id="remember_me">
+									Remember me on this computer
+								</label>
+							</label>
+						</p>
+						<p class="submit"><input type="submit" id="submit-signup" name="commit" value="Sign Up"></p>
+					</form>
+				</div>
+		</div>
+	</div>
+	</script>
+
+	<script src="assets/js/jquery/min.js"></script>
+	<script src="assets/js/underscore.js"></script>
+	<script src="assets/js/backbone.js"></script>
+	<script src="assets/js/handlebars.js"></script>
+	<script src="models/todoModel.js"></script>
+	<script src="models/todoCollections.js"></script>
+	<script src="views/todoView.js"></script>
+	<script src="views/appView.js"></script>
+	<script src="views/collectionView.js"></script>
+	<script src="app.js"></script>
+
+</body>
+</html>

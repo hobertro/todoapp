@@ -1,0 +1,102 @@
+body {
+	font: 13px/20px "Lucida Grande", Tahoma, Verdana, sans-serif;
+	color: #404040;
+}
+
+li {
+	list-style: none;
+}
+
+#logout {
+	font-size: 20px;
+}
+
+#loggedName {
+	font-size: 30px
+}
+
+
+#todo {
+	margin: 0 auto;
+}
+
+#inputTodo {
+	width: inherit;
+	height: 70px;
+	font-size: 36px;
+	display: block;
+	margin: 50px 0;
+	line-height: 50px;
+}
+
+#inputForm {
+	text-align: center;
+}
+
+/* Need vendor prefixes to style placeholders */
+
+#inputTodo:-moz-placeholder {
+	color: #c9c9c9 !important;
+	font-size: 36px;
+	font-style: italic;
+}
+
+#inputTodo::-webkit-input-placeholder {
+	color: #ccc;
+	font-size: 36px;
+	font-style: italic;
+}
+
+#todos {
+	width: auto;
+	padding: 30px;
+	padding-bottom: 13px;
+	border-style: dotted;
+	border-color: black;
+}
+
+#edit, #delete {
+	margin: 0 10px;
+	float: right;
+}
+
+#todos h2 {
+	text-align: center;
+}
+
+#enter {
+	display: none;
+}
+
+#logout {
+	float: right;
+}
+
+.edit {
+	margin: 10px;
+}
+
+.strikethrough {
+	text-decoration: line-through;
+	color: orange;
+}
+
+/* Individial ToDo models */
+
+.todoModel {
+	margin: 5px 0 20px;
+	font-size: 28px;
+
+}
+
+.todoHeader {	
+	width: 650px;
+	background: white;
+	margin: 0 auto;
+}
+
+input[type=checkbox] {
+	margin-top: 6px;
+	margin-right: 15px;
+}
+
