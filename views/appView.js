@@ -47,7 +47,9 @@ var AppView = Backbone.View.extend({
 		if (currentUser){
 			this.$el.html(this.template({username: Parse.User.current().toJSON().username}));
 		} else {
-			var newLoginView = new loginView();
+			this.newLoginView = new loginView();
+			this.newLoginView.parentView = this;
+			//this.undelegateEvents();
 		}
 
 	},
@@ -136,6 +138,7 @@ var loginView = Backbone.View.extend({
 		this.changeBackground(orange);
 		var self = this;
 		this.render();
+
 	},
 	events: {
 		"click #submit-signup": "signUp",
@@ -152,14 +155,13 @@ var loginView = Backbone.View.extend({
 		var password = $("#signup-password").val();
 		Parse.User.signUp(username, password, { ACL: new Parse.ACL() }, {
 			success: function(user) {
-				//alert("success!");
 				var white = "white";
 				self.undelegateEvents();
-				var testView = new AppView();
+				this.parentView.render();
 				self.changeBackground(white);
   },
 	error: function(user, error) {
-	alert("error");
+	alert("error, sign-up failed");
 			}
 		});
 	},
