@@ -96,7 +96,7 @@ var AppView = Backbone.View.extend({
 		});
 		return todo;
 	},
-	createOnEnter: function(event1){
+	createOnEnter: function(event){
 		if (event.which !== 13 || !$inputTodo.val().trim()){
 			return;
 			// 13 is keyCode property for "Enter Key"
