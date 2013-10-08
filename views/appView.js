@@ -47,6 +47,7 @@ var AppView = Backbone.View.extend({
 		if (currentUser){
 			this.$el.html(this.template({username: Parse.User.current().toJSON().username}));
 		} else {
+			this.undelegateEvents();
 			var newLoginView = new loginView();
 		}
 
@@ -54,6 +55,7 @@ var AppView = Backbone.View.extend({
 
 	//for creating views through the form input
 	createCollection: function(newCollection){
+			console.log("we are in create collection");
 			newCollection = newCollection || this.collection;
 			if (newCollection){
 			newCollection.forEach(function(model){
