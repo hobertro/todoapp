@@ -1,6 +1,5 @@
 // teal #43D1C3;
 
-
 var todoView = Backbone.View.extend({
 	//tagName: "li",
 	// will render each time a new view is created
