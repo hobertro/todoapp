@@ -8,7 +8,7 @@
 	<link rel="stylesheet" type="text/css" href="assets/css/appview.css"> 
 	<meta charset="UTF-8">
 	<script src="http://www.parsecdn.com/js/parse-1.2.12.min.js"></script>
-	<title>What to do?</title>
+	<title>JFDI To Do App</title>
 </head>
 <body>
 	<section id="todoapp">
@@ -23,7 +23,7 @@
 		<section id="todo">
 			<div class="container">
 				Welcome <span id="loggedName"> {{username}}</span> to your JFDI TODO LIST :D </span><button type="button" class="btn btn-default" id="logout">Log Out	</button>	
-				<!--<h2 id="inputForm">What good will you today?</h2>-->
+				<h2 id="inputForm"></h2>
 
 				<input id="inputTodo" placeholder="What good will you do today?" autofocus /> <button type="submit" id="enter">Enter</button>
 				<button type="button" class="btn btn-success" id="testButton">Completed</button>
@@ -63,7 +63,7 @@
 	
 	</div>
 
-	<div class="container">
+	<div id="signUpTemplate" class="container">
 		<div class="test1">
 			<div class="login">
 				<h1>Login</h1>

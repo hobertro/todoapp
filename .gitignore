@@ -1,1 +1,9 @@
+<<<<<<< HEAD
 .DS_Store
+=======
+# OS generated files #
+######################
+.DS_Store
+.DS_Store?
+._*
+>>>>>>> 85428e7a11c76451cba65885ff58766d6771740c
