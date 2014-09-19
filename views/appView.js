@@ -9,6 +9,26 @@ var AppView = Backbone.View.extend({
 	initialize: function(){
 		var self = this;
 		this.render();
+		$enter = this.$('#enter');
+		$inputTodo = this.$('#inputTodo');
+		$todos = this.$("#todos");
+		this.todos = new TodoCollection();
+		this.collection = this.todos;
+		this.todos.query = new Parse.Query(TodoModel);
+		this.todos.query.equalTo("user", Parse.User.current());
+		this.todos.query.find({
+			success: function(results){
+				console.log(("Successfully retrieved " + results.length + " To do models"));
+				//self.undelegateEvents();
+				_.each(results, function(model){
+					self.collection.add(model);
+				});
+				self.createCollection(self.collection);
+			},
+			error: function(error){
+				alert("Error, could not load models");
+			}
+		});
 	},
 
 	events: {
@@ -18,7 +38,7 @@ var AppView = Backbone.View.extend({
 		"click #testButton4": "testButton",
 		"click #enter": "createTodo",
 		'keypress #inputTodo': 'createOnEnter',
-		"click #logout": "logOut",
+		"click #logout": "logOut"
 	},
 
 	//render a collection of models 
@@ -26,22 +46,17 @@ var AppView = Backbone.View.extend({
 		var currentUser = Parse.User.current();
 		if (currentUser){
 			this.$el.html(this.template({username: Parse.User.current().toJSON().username}));
-			this.queryParse();
 		} else {
-<<<<<<< HEAD
 			//this.createLoginView();
 			this.newLoginView = new loginView();
 			this.newLoginView.parentView = this;
 			//this.undelegateEvents();
-=======
-			this.createLogin();
->>>>>>> 85428e7a11c76451cba65885ff58766d6771740c
 		}
+
 	},
 
 	//for creating views through the form input
 	createCollection: function(newCollection){
-			$todos = this.$("#todos");
 			newCollection = newCollection || this.collection;
 			if (newCollection){
 			newCollection.forEach(function(model){
@@ -59,8 +74,8 @@ var AppView = Backbone.View.extend({
 			return;
 		} else {
 		var value = $inputTodo.val();
-			this.createView(value);
-			$inputTodo.val(""); // reset value
+		this.createView(value);
+		$inputTodo.val(""); // reset value
 		}
 	},
 
@@ -83,10 +98,6 @@ var AppView = Backbone.View.extend({
 		return todo;
 	},
 	createOnEnter: function(event){
-<<<<<<< HEAD
-=======
-		$inputTodo = this.$('#inputTodo');
->>>>>>> 85428e7a11c76451cba65885ff58766d6771740c
 		if (event.which !== 13 || !$inputTodo.val().trim()){
 			return;
 			// 13 is keyCode property for "Enter Key"
@@ -95,21 +106,10 @@ var AppView = Backbone.View.extend({
 	},
 	logOut: function(){
 		Parse.User.logOut();
-<<<<<<< HEAD
 		var newLoginView = new loginView();
 		//this.createLoginView();
 		this.undelegateEvents();
-=======
-		if(this.newLoginView){
-			this.newLoginView.render();
-			this.collection.reset();
-		} else {
-			var franceezy = new loginView();
-		}
-		this.createLogin();
->>>>>>> 85428e7a11c76451cba65885ff58766d6771740c
 		this.changeBackground();
-		this.collection.reset(); // reset collection
 		},
 	uncomplete: function(){
 		$todos.html("");
@@ -126,37 +126,11 @@ var AppView = Backbone.View.extend({
 	changeBackground: function(){
 		document.body.style.background = "orange";
 	},
-<<<<<<< HEAD
 	/*createLoginView: function(){
 		var newLoginView = new loginView();
 		this.newLoginView.parentView = this;
 		this.newLoginView.render();
 	}*/
-=======
-	createLogin: function(){
-			this.newLoginView = new loginView();
-			this.newLoginView.parentView = this;
-	},
-	queryParse: function(){
-		var self = this;
-			this.todos = new TodoCollection();
-			this.collection = this.todos;
-			this.todos.query = new Parse.Query(TodoModel);
-			this.todos.query.equalTo("user", Parse.User.current());
-			this.todos.query.find({
-				success: function(results){
-					console.log(("Successfully retrieved " + results.length + " To do models in queryParse fxn"));
-					_.each(results, function(model){
-						self.collection.add(model);
-					});
-					self.createCollection(results);
-				},
-				error: function(error){
-					alert("Error, could not load models");
-				}
-		});
-	}
->>>>>>> 85428e7a11c76451cba65885ff58766d6771740c
 });
 
 // All things login and sign up
@@ -168,16 +142,16 @@ var loginView = Backbone.View.extend({
 	template: Handlebars.compile($("#loginTemplate").html()),
 	initialize: function(){
 		var orange = "orange";
-			this.changeBackground(orange);
-			this.render();
+		this.changeBackground(orange);
+		var self = this;
+		this.render();
 	},
 	events: {
-		"click #testButton6": "testButton6",
 		"click #submit-signup": "signUp",
 		"click #submit-login": "login"
 	},
 	render: function(){
-		$("#todoapp").html(this.template());
+		this.$el.html(this.template());
 		return this;
 	},
 	signUp: function(e){
@@ -185,7 +159,6 @@ var loginView = Backbone.View.extend({
 		e.preventDefault();
 		var username = $("#signUp").val();
 		var password = $("#signup-password").val();
-<<<<<<< HEAD
 		Parse.User.signUp(username, password, { ACL: new Parse.ACL() }, {
 			success: function(user) {
 				var white = "white";
@@ -195,17 +168,6 @@ var loginView = Backbone.View.extend({
   },
 	error: function(user, error) {
 	alert("error, sign-up failed");
-=======
-			Parse.User.signUp(username, password, { ACL: new Parse.ACL() }, {
-				success: function(user) {
-					var white = "white";
-						self.undelegateEvents();
-						self.parentView.render();
-						self.changeBackground(white);
-			},
-	error: function(user, error) {
-			alert("error");
->>>>>>> 85428e7a11c76451cba65885ff58766d6771740c
 			}
 		});
 	},
@@ -215,7 +177,6 @@ var loginView = Backbone.View.extend({
 		var self = this;
 		var username = $("#username").val();
 		var password = $("#login-password").val();
-<<<<<<< HEAD
 		Parse.User.logIn(username, password,{
 			success: function(user){
 				self.undelegateEvents();
@@ -229,23 +190,11 @@ var loginView = Backbone.View.extend({
 				$('#submit-login').attr("disabled", false);
 			}
 		});
-=======
-			Parse.User.logIn(username, password,{
-				success: function(user){
-					var white = "white";
-						self.undelegateEvents();
-						self.parentView.render();
-						self.changeBackground(white);
-				},
-				error: function(user, error){
-					alert("login failed");
-					$('#submit-login').attr("disabled", false);
-				}
-			});
->>>>>>> 85428e7a11c76451cba65885ff58766d6771740c
 	},
 	changeBackground: function(color){
 		document.body.style.background = color;
 	},
 });
+
+
 
