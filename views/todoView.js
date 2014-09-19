@@ -10,9 +10,9 @@ var todoView = Backbone.View.extend({
 
 	events: {
 		"click [type='checkbox']": "strikeout",
-		"click #edit": "editView",
-		"click #save": "render",
-		"click #delete": "deleteView"
+		"click .edit": "editView",
+		"click .save": "render",
+		"click .delete": "deleteView"
 	},
 
 	initialize: function(){

@@ -22,7 +22,6 @@
 	<script id="inputTemplate" type="text/x-handlebars-template">
 		<section id="todo">
 			<div class="container">
-
 				Welcome <span id="loggedName"> {{username}}</span> to your JFDI TODO LIST :D </span><button type="button" class="btn btn-default" id="logout">Log Out	</button>	
 				<!--<h2 id="inputForm">What good will you today?</h2>-->
 
@@ -30,7 +29,7 @@
 				<button type="button" class="btn btn-success" id="testButton">Completed</button>
 				<button type="button" class="btn btn-warning" id="testButton2">Uncompleted</button>
 				<button type="button" class="btn btn-info"id="testButton3">All</button> 
-				<h1>REMEMBER TO JUST F*CKING DO IT:</h2> 
+				<h1>REMEMBER TO JUST F*CKING DO IT:</h2>
 					<div id="todos"></div>
 			</div>
 		</section>
@@ -38,10 +37,18 @@
 
 	<!-- Model template renders the model checkbox, model title, edit and delete button -->
 	<script id="modelTemplate" type="text/x-handlebars-template">
-		<li class="{{#if completed}} strikethrough {{else}} none {{/if}}" >
-		<input type="checkbox" {{#if completed}} checked="checked" {{/if}} /> {{ title }}
-		<button type="button" class="btn btn-primary" id="edit">Edit</button><button type="button" class="btn btn-danger" id="delete">Delete</button>
-		</li>
+		<div class="row">
+		   <input class="checky col-xs-1" type="checkbox" {{#if completed}} checked="checked" {{/if}} />
+
+			<div class="col-xs-8">
+				<span class="todo-span col-xs-12">{{ title }}</span>
+			</div>
+
+			<div class="col-xs-3">
+				<button type="button" class="btn btn-primary edit id">Edit</button>
+				<button type="button" class="btn btn-danger delete">Delete</button>
+			</div>
+		</div>
 	</script>
 
 	<!-- Edit view  -->
@@ -97,6 +104,7 @@
 				</div>
 		</div>
 	</div>
+
 	</script>
 
 	<script src="assets/js/jquery/min.js"></script>
