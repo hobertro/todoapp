@@ -23,12 +23,13 @@ var todoView = Backbone.View.extend({
 		return this;
 	},
 	strikeout: function(){
-			if (this.$("li").css("textDecoration") === "none"){
-			this.$("li").css("textDecoration", "line-through");
+			console.log("strikeout");
+			if (this.$("span").css("textDecoration") === "none"){
+			this.$("span").css("textDecoration", "line-through");
 			this.model.set("completed", true);
 			this.model.save();
 		}	else {
-			this.$("li").css("textDecoration", "none");
+			this.$("span").css("textDecoration", "none");
 			this.model.set("completed", false);
 			this.model.save();
 		}
@@ -55,7 +56,7 @@ var todoView = Backbone.View.extend({
 var editTodoView = Backbone.View.extend({
 	className: "editView",
 	events: {
-		"click button": "saveEdit",
+		"click .save": "saveEdit",
 		"keypress input": "createOnEnter"
 	},
 
@@ -79,6 +80,7 @@ var editTodoView = Backbone.View.extend({
 				console.log("model failed to save");
 			}
 		});
+		this.parentView.render();
 		}
 	},
 	createOnEnter: function(event){
@@ -87,7 +89,5 @@ var editTodoView = Backbone.View.extend({
 		// 13 is keyCode property for "Enter Key"
 	}
 	this.saveEdit();
-	this.parentView.render();
-	console.log(this.parentView);
 	}
 });

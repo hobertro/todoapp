@@ -17,8 +17,8 @@ var TodoCollection = Parse.Collection.extend({
 		});
 		return completed;
 	},
-	comparator: function(model){
-		return model.get('title');
+	comparator: function(a,b){
+		return a.get('createdAt') > b.get('createdAt') ? 1 : 0;
 	}
 });
 

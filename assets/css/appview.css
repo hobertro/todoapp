@@ -1,7 +1,6 @@
 
 body {
 	font: 13px/20px "Lucida Grande", Tahoma, Verdana, sans-serif;
-	color: #404040;
 }
 
 li {
@@ -88,7 +87,9 @@ li {
 
 
 .todoModel {
+	width: 100%;
 	margin: 5px 0 20px;
+	padding: 20px;
 	font-size: 28px;
 	height: 100%;
 }
@@ -110,7 +111,6 @@ input[type=checkbox] {
 	margin-right: 15px;
 }
 
-<<<<<<< HEAD
 .testdiv3 {
 	background-color: black;
 }
@@ -118,11 +118,15 @@ input[type=checkbox] {
 .testdiv8 {
 	background-color: red;
 }
-=======
+
 .editView {
 	position: relative;
 	top: 10px;
 	left: 50px;
 }
 
->>>>>>> 85428e7a11c76451cba65885ff58766d6771740c
+.completed {
+	text-decoration: line-through;
+	opacity: 0.5;
+}
+

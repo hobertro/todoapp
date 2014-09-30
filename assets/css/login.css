@@ -1,3 +1,5 @@
+/*
+
 body  {
 	background: white;
 }
@@ -204,7 +206,12 @@ input[type=radio] {
 
 input[type=radio] {
 -webkit-border-radius: 2em; /* Make radios round */
+
+/*
+
 }
+
+
 
 input[type=checkbox]:checked::after {
 content: "✔";
@@ -223,4 +230,48 @@ select {
 	-webkit-box-shadow: 0 1px 2px rgba(0,0,0,.05);
 	-moz-box-shadow: 0 1px 2px rgba(0,0,0,.05);	
 	color: #444;
+}
+
+*/
+.container {
+	margin: 80px auto;
+	width: 900px;
+}
+
+.JFDI {
+	margin-bottom: 20px;
+	color: white;
+}
+
+.login-screen {
+	min-height: 473px;
+	padding: 123px 199px 33px 306px;
+	background-color: #1abc9c;
+}
+
+.login-form {
+	position: relative;
+	padding: 24px 23px 20px;
+	background-color: #edeff1;
+}
+
+.login-form h1 {
+	margin-bottom: 50px;
+}
+
+.form-group {
+	position: relative;
+	margin-bottom: 20px;
+}
+
+.form-control {
+	height: 42px;
+	padding: 8px 12px;
+	font-family: "Lato", Helvetica, Arial, sans-serif;
+	font-size: 15px;
+	line-height: 1.467;
+	color: #34495e;
+	border: 2px solid #bdc3c7;
+	border-radius: 6px;
+	box-shadow: none;
 }

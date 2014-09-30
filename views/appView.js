@@ -124,13 +124,8 @@ var AppView = Backbone.View.extend({
 		this.createCollection();
 	},
 	changeBackground: function(){
-		document.body.style.background = "orange";
-	},
-	/*createLoginView: function(){
-		var newLoginView = new loginView();
-		this.newLoginView.parentView = this;
-		this.newLoginView.render();
-	}*/
+		document.body.style.background = "#1ABC9C";
+	}
 });
 
 // All things login and sign up
@@ -141,8 +136,8 @@ var loginView = Backbone.View.extend({
 
 	template: Handlebars.compile($("#loginTemplate").html()),
 	initialize: function(){
-		var orange = "orange";
-		this.changeBackground(orange);
+		var turtle = "#1ABC9C";
+		this.changeBackground(turtle);
 		var self = this;
 		this.render();
 	},
@@ -155,15 +150,17 @@ var loginView = Backbone.View.extend({
 		return this;
 	},
 	signUp: function(e){
+		alert("hihi");
 		var self = this;
 		e.preventDefault();
-		var username = $("#signUp").val();
-		var password = $("#signup-password").val();
+		var username = $("#signin-name").val();
+		var password = $("#signin-pass").val();
 		Parse.User.signUp(username, password, { ACL: new Parse.ACL() }, {
 			success: function(user) {
 				var white = "white";
-				//self.undelegateEvents();
-				this.parentView.render();
+				self.undelegateEvents();
+				//this.parentView.render();
+				var newAppView = new AppView();
 				self.changeBackground(white);
   },
 	error: function(user, error) {
@@ -175,8 +172,10 @@ var loginView = Backbone.View.extend({
 		e.preventDefault();
 		$('#submit-login').attr("disabled", true);
 		var self = this;
-		var username = $("#username").val();
-		var password = $("#login-password").val();
+		var username = $("#login-name").val();
+		console.log(username);
+		var password = $("#login-pass").val();
+		console.log(password);
 		Parse.User.logIn(username, password,{
 			success: function(user){
 				self.undelegateEvents();

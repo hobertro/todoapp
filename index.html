@@ -5,7 +5,8 @@
 	<link rel="stylesheet" type="text/css" href="assets/css/bootstrap.css"> 
 	<link rel="stylesheet" type="text/css" href="assets/css/index.css"> 
 	<link rel="stylesheet" type="text/css" href="assets/css/login.css"> 
-	<link rel="stylesheet" type="text/css" href="assets/css/appview.css"> 
+	<link rel="stylesheet" type="text/css" href="assets/css/appview.css">
+	<link rel="stylesheet" type="text/css" href="assets/css/flat-ui.css"> 
 	<meta charset="UTF-8">
 	<script src="http://www.parsecdn.com/js/parse-1.2.12.min.js"></script>
 	<title>JFDI To Do App</title>
@@ -22,7 +23,8 @@
 	<script id="inputTemplate" type="text/x-handlebars-template">
 		<section id="todo">
 			<div class="container">
-				Welcome <span id="loggedName"> {{username}}</span> to your JFDI TODO LIST :D </span><button type="button" class="btn btn-default" id="logout">Log Out	</button>	
+				Welcome <span id="loggedName"> {{username}} </span> to your JFDI TODO LIST :D </span>
+				<button type="button" class="btn btn-default" id="logout">Log Out	</button>	
 				<h2 id="inputForm"></h2>
 
 				<input id="inputTodo" placeholder="What good will you do today?" autofocus /> <button type="submit" id="enter">Enter</button>
@@ -38,72 +40,80 @@
 	<!-- Model template renders the model checkbox, model title, edit and delete button -->
 	<script id="modelTemplate" type="text/x-handlebars-template">
 		<div class="row">
-		   <input class="checky col-xs-1" type="checkbox" {{#if completed}} checked="checked" {{/if}} />
-
-			<div class="col-xs-8">
-				<span class="todo-span col-xs-12">{{ title }}</span>
-			</div>
-
-			<div class="col-xs-3">
+		   <div class="col-xs-1">
+		   <input class="custom-checkbox" type="checkbox" {{#if completed}} checked="checked"  {{/if}} />
+		   </div>
+			<div class="col-xs-9">
+				<span class="todo-span {{#if completed}} completed {{/if}}">{{ title }}</span>
 				<button type="button" class="btn btn-primary edit id">Edit</button>
 				<button type="button" class="btn btn-danger delete">Delete</button>
 			</div>
+
 		</div>
 	</script>
 
 	<!-- Edit view  -->
 
 	<script id="editTemplate" type="text/x-handlebars-template">
-		<input value="{{title}}" /> <button type="button" class="btn btn-info" id="save">Save</button>
+		<input value="{{title}}" /> <button type="button" class="btn btn-info save" id="save">Save</button>
 	</script>
 
 	<script id="loginTemplate" type="text/x-handlebars-template">
-	<div class="JFDI">
-		<h1>Welcome to the JFDI To Do List</h1>
-	
-	</div>
+
 
 	<div id="signUpTemplate" class="container">
-		<div class="test1">
-			<div class="login">
-				<h1>Login</h1>
-				<form method="post" action="">
-					<p><input type="text" id="username" name="login" value="" placeholder="Username"</p>
-					<p><input type="password" id="login-password" name="password" value="" placeholder="Password"></p>
-					<p class="remember_me">
-						<label>
-							<label>
-								<input type="checkbox" name="remember_me" id="remember_me">
-								Remember me on this computer
-							</label>
-						</label>
-					</p>
-					<p class="submit"><input type="submit" id="submit-login" name="commit" value="Login"></p>
-				</form>
+		<h3 class="JFDI text-center">Welcome to the JFDI To Do List</h3>
+		<div class="row">
+			<div class=" col-xs-6">
+				<div class="logins-screen">
+
+					<div class="login-icon">
+
+					</div>
+					<div class="login-form">
+						<h1 class="text-center">Login</h1>
+						<div class="form-group">
+							<input type="text" class="form-control login-field" value placeholder="Enter your name" id="login-name">
+							<label class="login-field-icon frui-user" for="login-name"></label>
+						</div>
+						<div class="form-group">
+							<input type="password" class="form-control login-field" value placeholder="Password" id="login-pass">
+							<label class="login-field-icon frui-user" for="login-name"></label>
+						</div>
+						<a class="btn btn-primary btn-lg btn-block" id="submit-login" href="#">Login</a>
+						<a class="login-link text-center" href="#">Lost your password?</a>
+		 			</div>
+				</div>
 			</div>
-				<div class="login-help">
-					<p>Forgot your password? <a href="#">Click here to reset it</a>.
+
+
+			<div class=" col-xs-6">
+				<div class="logins-screen">
+
+					<div class="login-icon">
+
+					</div>
+					<div class="login-form">
+						<h1 class="text-center">Sign Up</h1>
+						<div class="form-group">
+							<input type="text" class="form-control login-field" value placeholder="Enter your name" id="signin-name">
+							<label class="login-field-icon frui-user" for="login-name"></label>
+						</div>
+						<div class="form-group">
+							<input type="password" class="form-control login-field" value placeholder="Password" id="signin-pass">
+							<label class="login-field-icon frui-user" for="login-name"></label>
+						</div>
+						<div class="form-group">
+							<input type="password" class="form-control login-field" value placeholder="Re-type Password" id="re-signin-pass">
+							<label class="login-field-icon frui-user" for="login-name"></label>
+						</div>
+						<a class="btn btn-primary btn-lg btn-block" href="#" id="submit-signup">Sign Up</a>
+						<a class="login-link text-center" href="#">Lost your password?</a>
+		 			</div>
 				</div>
+			</div>
 		</div>
-		<div class="test2">
-				<div class="login">
-					<h1>Sign Up</h1>
-					<form method="post" action="">
-						<p><input type="text" id="signUp" name="signUp" value="" placeholder="Username"</p>
-						<p><input type="password" id="signup-password" name="password" value="" placeholder="Password"></>
-						<p class="remember_me">
-							<label>
-								<label>
-									<input type="checkbox" name="remember_me" id="remember_me">
-									Remember me on this computer
-								</label>
-							</label>
-						</p>
-						<p class="submit"><input type="submit" id="submit-signup" name="commit" value="Sign Up"></p>
-					</form>
-				</div>
-		</div>
-	</div>
+</div>
 
 	</script>
 

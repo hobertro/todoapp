@@ -10,7 +10,7 @@ var TodoModel = Parse.Object.extend("Todo", {
 	},
 	defaults: {
 		title: "I am a title",
-		completed: false,
+		completed: false
 		},
 	validate: function(attrs){
 		if(attrs.title === null || ""){
