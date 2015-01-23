@@ -18,7 +18,13 @@ var TodoCollection = Parse.Collection.extend({
 		return completed;
 	},
 	comparator: function(a,b){
-		return a.get('createdAt') > b.get('createdAt') ? 1 : 0;
+		return a.createdAt > b.createdAt ? 1 : 0;
+	},
+	nextOrder: function(){
+		if ( !this.length ) {
+			return 1;
+		}
+		return this.last().get('order') + 1;
 	}
 });
 

@@ -16,8 +16,6 @@
 	</section>
 
 	<section id="signIn">
-
-
 	</section>
 
 	<script id="inputTemplate" type="text/x-handlebars-template">
@@ -31,6 +29,9 @@
 				<button type="button" class="btn btn-success" id="testButton">Completed</button>
 				<button type="button" class="btn btn-warning" id="testButton2">Uncompleted</button>
 				<button type="button" class="btn btn-info"id="testButton3">All</button> 
+				<button type="button" class="btn btn-default" id="toggle-all">Toggle All</button>
+				<button type="button" class="btn btn-default" id="reset-all">Reset All</button>
+				<button type="button" class="btn btn-default" id="clear-all">Clear All</button>
 				<h1>REMEMBER TO JUST F*CKING DO IT:</h2>
 					<div id="todos"></div>
 			</div>
@@ -39,23 +40,24 @@
 
 	<!-- Model template renders the model checkbox, model title, edit and delete button -->
 	<script id="modelTemplate" type="text/x-handlebars-template">
+	<div class="individual_todo">
 		<div class="row">
 		   <div class="col-xs-1">
 		   <input class="custom-checkbox" type="checkbox" {{#if completed}} checked="checked"  {{/if}} />
 		   </div>
-			<div class="col-xs-9">
+			<div class="col-xs-11 content-title">
 				<span class="todo-span {{#if completed}} completed {{/if}}">{{ title }}</span>
 				<button type="button" class="btn btn-primary edit id">Edit</button>
 				<button type="button" class="btn btn-danger delete">Delete</button>
 			</div>
-
 		</div>
+	</div>
 	</script>
 
 	<!-- Edit view  -->
 
 	<script id="editTemplate" type="text/x-handlebars-template">
-		<input value="{{title}}" /> <button type="button" class="btn btn-info save" id="save">Save</button>
+		<input class="edit-input" value="{{title}}" /> <button type="button" class="btn btn-info save" id="save">Save</button>
 	</script>
 
 	<script id="loginTemplate" type="text/x-handlebars-template">

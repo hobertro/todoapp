@@ -49,17 +49,9 @@ li {
 }
 
 #todos {
-	width: auto;
-	padding: 30px;
-	padding-bottom: 13px;
-	border-style: dotted;
-	border-color: black;
-}
-
-#edit, #delete {
-	position: relative;
-	margin: 0 10px;
-	float: right;
+	width: 100%;
+	padding: 50px;
+	border: 2px dotted black;
 }
 
 #todos h2 {
@@ -111,18 +103,12 @@ input[type=checkbox] {
 	margin-right: 15px;
 }
 
-.testdiv3 {
-	background-color: black;
-}
-
-.testdiv8 {
-	background-color: red;
+.editView, .edit-input {
+	width: 100%;
 }
 
 .editView {
-	position: relative;
-	top: 10px;
-	left: 50px;
+	margin: 10px 0;
 }
 
 .completed {

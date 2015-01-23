@@ -12,6 +12,8 @@ var AppView = Backbone.View.extend({
 		$enter = this.$('#enter');
 		$inputTodo = this.$('#inputTodo');
 		$todos = this.$("#todos");
+		$.allCheckbox = this.$("#toggle-all")[0];
+		this.allCheckbox = this.$('#toggle-all')[0];
 		this.todos = new TodoCollection();
 		this.collection = this.todos;
 		this.todos.query = new Parse.Query(TodoModel);
@@ -38,7 +40,10 @@ var AppView = Backbone.View.extend({
 		"click #testButton4": "testButton",
 		"click #enter": "createTodo",
 		'keypress #inputTodo': 'createOnEnter',
-		"click #logout": "logOut"
+		"click #logout": "logOut",
+		"click #toggle-all": "toggleAllComplete",
+		"click #reset-all": "resetAll",
+		"click #clear-all": "clearCompleted"
 	},
 
 	//render a collection of models 
@@ -125,7 +130,29 @@ var AppView = Backbone.View.extend({
 	},
 	changeBackground: function(){
 		document.body.style.background = "#1ABC9C";
-	}
+	},
+	/* from dev backbone */
+	filterOne: function(todo){
+		todo.trigger('visible');
+	},
+	filterAll: function(){
+		app.Todos.each(this.filterOne, this);
+	},
+	clearCompleted: function(){
+		console.log("sup");
+		_.invoke(this.todos.complete(), 'destroy');
+		return false;
+	},
+	toggleAllComplete: function(){
+		this.collection.each(function(todo){
+			todo.save({'completed': true});
+		});
+	},
+	resetAll: function(){
+		this.collection.each(function(todo){
+			todo.save({'completed': false});
+		});
+	},
 });
 
 // All things login and sign up
@@ -150,7 +177,6 @@ var loginView = Backbone.View.extend({
 		return this;
 	},
 	signUp: function(e){
-		alert("hihi");
 		var self = this;
 		e.preventDefault();
 		var username = $("#signin-name").val();
@@ -173,9 +199,7 @@ var loginView = Backbone.View.extend({
 		$('#submit-login').attr("disabled", true);
 		var self = this;
 		var username = $("#login-name").val();
-		console.log(username);
 		var password = $("#login-pass").val();
-		console.log(password);
 		Parse.User.logIn(username, password,{
 			success: function(user){
 				self.undelegateEvents();

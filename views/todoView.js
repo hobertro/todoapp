@@ -10,12 +10,11 @@ var todoView = Backbone.View.extend({
 	events: {
 		"click [type='checkbox']": "strikeout",
 		"click .edit": "editView",
-		"click .save": "render",
 		"click .delete": "deleteView"
 	},
 
 	initialize: function(){
-		//this.listenTo(this.model, 'change', this.render());
+		this.listenTo(this.model, 'change', this.render);
 		this.render();
 	},
 	render: function(){
@@ -25,22 +24,24 @@ var todoView = Backbone.View.extend({
 	strikeout: function(){
 			console.log("strikeout");
 			if (this.$("span").css("textDecoration") === "none"){
-			this.$("span").css("textDecoration", "line-through");
-			this.model.set("completed", true);
-			this.model.save();
+				this.$("span").css("textDecoration", "line-through");
+				this.model.set("completed", true);
+				this.model.save();
 		}	else {
-			this.$("span").css("textDecoration", "none");
-			this.model.set("completed", false);
-			this.model.save();
+				this.$("span").css("textDecoration", "none");
+				this.model.set("completed", false);
+				this.model.save();
 		}
 	},
 	editView: function(){
-		// if the edit view doesn't exist, then create one. 
+		// if the edit view doesn't exist, then create one.
+		this.$contentTitle = this.$('.content-title');
+		console.log(this.$contentTitle);
 		if($(".editView").length === 0){
-		var editView = new editTodoView({model: this.model});
-		this.editView = editView;
-		this.editView.parentView = this;
-		this.$el.append(editView.render().el);
+			var editView = new editTodoView({model: this.model});
+			this.editView = editView;
+			this.editView.parentView = this;
+			this.$contentTitle.append(editView.render().el);
 		} else {
 			return ;
 		}
@@ -71,7 +72,6 @@ var editTodoView = Backbone.View.extend({
 		if (savedInput === "" || null){
 			return;
 		} else {
-		//this.model.set({"title": savedInput});
 		this.model.save({"title": savedInput}, {
 			success: function(){
 				console.log("model successfully saved as " + savedInput);
@@ -88,6 +88,6 @@ var editTodoView = Backbone.View.extend({
 		return;
 		// 13 is keyCode property for "Enter Key"
 	}
-	this.saveEdit();
+		this.saveEdit();
 	}
 });
