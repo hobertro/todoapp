@@ -12,7 +12,7 @@ var TodoCollection = Parse.Collection.extend({
 		return uncompleted;
 	},
 	complete: function(){
-		var completed = this.filter(function(todo){
+		this.filter(function(todo){
 			return todo.get("completed");
 		});
 		return completed;

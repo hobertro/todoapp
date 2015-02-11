@@ -139,7 +139,6 @@ var AppView = Backbone.View.extend({
 		app.Todos.each(this.filterOne, this);
 	},
 	clearCompleted: function(){
-		console.log("sup");
 		_.invoke(this.todos.complete(), 'destroy');
 		return false;
 	},
