@@ -8,7 +8,6 @@ var AppView = Backbone.View.extend({
 
 	initialize: function(){
 		var self = this;
-		this.render();
 			$enter = this.$('#enter');
 			$inputTodo = this.$('#inputTodo');
 			$todos = this.$("#todos");
@@ -30,6 +29,7 @@ var AppView = Backbone.View.extend({
 				alert("Error, could not load models");
 			}
 		});
+		this.render();
 	},
 
 	events: {
