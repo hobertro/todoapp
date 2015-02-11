@@ -1,7 +1,11 @@
 Parse.initialize("AdGqJXnBWEDhZKgqPnKKlxiLOdzbbCc8Vv2KEanX", "I66EXwDbj2TCTpWjgsHjqwnEYdhb61ChiqiCxpO5");
 
 var TodoCollection = Parse.Collection.extend({
+
 	model: TodoModel,
+	initialize: function(){
+		console.log("rendered");
+	},
 	allTodo: function(){
 		return this.models;
 	},
@@ -12,7 +16,7 @@ var TodoCollection = Parse.Collection.extend({
 		return uncompleted;
 	},
 	complete: function(){
-		this.filter(function(todo){
+		var completed = this.filter(function(todo){
 			return todo.get("completed");
 		});
 		return completed;

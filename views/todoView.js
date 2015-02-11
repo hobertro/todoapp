@@ -19,6 +19,7 @@ var todoView = Backbone.View.extend({
 	},
 	render: function(){
 		this.$el.html(this.template(this.model.toJSON()));
+		this.model.view = this;
 		return this;
 	},
 	strikeout: function(){

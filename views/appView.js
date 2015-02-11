@@ -9,19 +9,18 @@ var AppView = Backbone.View.extend({
 	initialize: function(){
 		var self = this;
 		this.render();
-		$enter = this.$('#enter');
-		$inputTodo = this.$('#inputTodo');
-		$todos = this.$("#todos");
-		$.allCheckbox = this.$("#toggle-all")[0];
-		this.allCheckbox = this.$('#toggle-all')[0];
-		this.todos = new TodoCollection();
-		this.collection = this.todos;
-		this.todos.query = new Parse.Query(TodoModel);
-		this.todos.query.equalTo("user", Parse.User.current());
-		this.todos.query.find({
+			$enter = this.$('#enter');
+			$inputTodo = this.$('#inputTodo');
+			$todos = this.$("#todos");
+			$.allCheckbox = this.$("#toggle-all")[0];
+			this.allCheckbox = this.$('#toggle-all')[0];
+			this.todos = new TodoCollection();
+			this.collection = this.todos;
+			this.todos.query = new Parse.Query(TodoModel);
+			this.todos.query.equalTo("user", Parse.User.current());
+			this.todos.query.find({
 			success: function(results){
 				console.log(("Successfully retrieved " + results.length + " To do models"));
-				//self.undelegateEvents();
 				_.each(results, function(model){
 					self.collection.add(model);
 				});
@@ -52,12 +51,9 @@ var AppView = Backbone.View.extend({
 		if (currentUser){
 			this.$el.html(this.template({username: Parse.User.current().toJSON().username}));
 		} else {
-			//this.createLoginView();
 			this.newLoginView = new loginView();
 			this.newLoginView.parentView = this;
-			//this.undelegateEvents();
 		}
-
 	},
 
 	//for creating views through the form input
@@ -112,7 +108,6 @@ var AppView = Backbone.View.extend({
 	logOut: function(){
 		Parse.User.logOut();
 		var newLoginView = new loginView();
-		//this.createLoginView();
 		this.undelegateEvents();
 		this.changeBackground();
 		},
@@ -139,6 +134,10 @@ var AppView = Backbone.View.extend({
 		app.Todos.each(this.filterOne, this);
 	},
 	clearCompleted: function(){
+		_.each(this.todos.complete(), function(todo){
+			todo.view.deleteView();
+			return false;
+		});
 		_.invoke(this.todos.complete(), 'destroy');
 		return false;
 	},
@@ -184,7 +183,6 @@ var loginView = Backbone.View.extend({
 			success: function(user) {
 				var white = "white";
 				self.undelegateEvents();
-				//this.parentView.render();
 				var newAppView = new AppView();
 				self.changeBackground(white);
   },
@@ -203,7 +201,6 @@ var loginView = Backbone.View.extend({
 			success: function(user){
 				self.undelegateEvents();
 				var newAppView = new AppView();
-				//self.parentView.render();
 				var white = "white";
 				self.changeBackground(white);
 			},
