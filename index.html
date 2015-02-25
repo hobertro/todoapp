@@ -12,11 +12,9 @@
 	<title>JFDI To Do App</title>
 </head>
 <body>
-	<section id="todoapp">
-	</section>
+	<section id="todoapp"></section>
 
-	<section id="signIn">
-	</section>
+	<section id="signIn"></section>
 
 	<script id="inputTemplate" type="text/x-handlebars-template">
 		<section id="todo">
@@ -25,10 +23,11 @@
 				<button type="button" class="btn btn-default" id="logout">Log Out	</button>	
 				<h2 id="inputForm"></h2>
 
-				<input id="inputTodo" placeholder="What good will you do today?" autofocus /> <button type="submit" id="enter">Enter</button>
+				<input id="inputTodo" placeholder="What good will you do today?" autofocus /> 
+				<button type="button" class="btn btn-primary" id="enter">Enter</button>
 				<button type="button" class="btn btn-success" id="testButton">Completed</button>
 				<button type="button" class="btn btn-warning" id="testButton2">Uncompleted</button>
-				<button type="button" class="btn btn-info"id="testButton3">All</button> 
+				<button type="button" class="btn btn-info"    id="testButton3">All</button> 
 				<button type="button" class="btn btn-default" id="toggle-all">Toggle All</button>
 				<button type="button" class="btn btn-default" id="reset-all">Reset All</button>
 				<button type="button" class="btn btn-default" id="clear-all">Clear All</button>

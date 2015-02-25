@@ -6,10 +6,12 @@ var AppView = Backbone.View.extend({
 
 	template: Handlebars.compile($("#inputTemplate").html()),
 
-	initialize: function(){
+	initialize: function(user){
+		this.render();
 		var self = this;
 			$enter = this.$('#enter');
 			$inputTodo = this.$('#inputTodo');
+			console.log($inputTodo);
 			$todos = this.$("#todos");
 			$.allCheckbox = this.$("#toggle-all")[0];
 			this.allCheckbox = this.$('#toggle-all')[0];
@@ -23,13 +25,14 @@ var AppView = Backbone.View.extend({
 				_.each(results, function(model){
 					self.collection.add(model);
 				});
+				console.log("above collection");
+				console.log(self.collection);
 				self.createCollection(self.collection);
 			},
 			error: function(error){
 				alert("Error, could not load models");
 			}
 		});
-		this.render();
 	},
 
 	events: {
@@ -99,6 +102,8 @@ var AppView = Backbone.View.extend({
 		return todo;
 	},
 	createOnEnter: function(event){
+		console.log("in create on enter");
+		console.log(event);
 		if (event.which !== 13 || !$inputTodo.val().trim()){
 			return;
 			// 13 is keyCode property for "Enter Key"
@@ -197,10 +202,12 @@ var loginView = Backbone.View.extend({
 		var self = this;
 		var username = $("#login-name").val();
 		var password = $("#login-pass").val();
+		console.log(username);
+		console.log(password);
 		Parse.User.logIn(username, password,{
 			success: function(user){
 				self.undelegateEvents();
-				var newAppView = new AppView();
+				var newAppView = new AppView(user);
 				var white = "white";
 				self.changeBackground(white);
 			},
